@@ -18,8 +18,9 @@
 		711FABEE1FBF550C0074927B /* PhysicsCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711FABED1FBF550C0074927B /* PhysicsCategory.swift */; };
 		711FABF01FBF559F0074927B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711FABEF1FBF559F0074927B /* Constants.swift */; };
 		71DAB3451FC340950099991C /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DAB3441FC340950099991C /* Player.swift */; };
-		71DAB3471FC340AE0099991C /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DAB3461FC340AE0099991C /* Background.swift */; };
 		71DAB3491FC341E80099991C /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DAB3481FC341E80099991C /* GameState.swift */; };
+		71DAB34D1FC3554F0099991C /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DAB34C1FC3554F0099991C /* Background.swift */; };
+		71DAB34F1FC359A50099991C /* Positions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DAB34E1FC359A50099991C /* Positions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,8 +37,9 @@
 		711FABED1FBF550C0074927B /* PhysicsCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsCategory.swift; sourceTree = "<group>"; };
 		711FABEF1FBF559F0074927B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		71DAB3441FC340950099991C /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
-		71DAB3461FC340AE0099991C /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 		71DAB3481FC341E80099991C /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
+		71DAB34C1FC3554F0099991C /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
+		71DAB34E1FC359A50099991C /* Positions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Positions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 			children = (
 				711FABED1FBF550C0074927B /* PhysicsCategory.swift */,
 				711FABEF1FBF559F0074927B /* Constants.swift */,
+				71DAB34E1FC359A50099991C /* Positions.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -115,7 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				71DAB3441FC340950099991C /* Player.swift */,
-				71DAB3461FC340AE0099991C /* Background.swift */,
+				71DAB34C1FC3554F0099991C /* Background.swift */,
 			);
 			path = Sprite;
 			sourceTree = "<group>";
@@ -198,8 +201,9 @@
 				711FABEE1FBF550C0074927B /* PhysicsCategory.swift in Sources */,
 				711FABD91FBE26B90074927B /* GameViewController.swift in Sources */,
 				71DAB3451FC340950099991C /* Player.swift in Sources */,
-				71DAB3471FC340AE0099991C /* Background.swift in Sources */,
+				71DAB34F1FC359A50099991C /* Positions.swift in Sources */,
 				711FABD11FBE26B90074927B /* AppDelegate.swift in Sources */,
+				71DAB34D1FC3554F0099991C /* Background.swift in Sources */,
 				71DAB3491FC341E80099991C /* GameState.swift in Sources */,
 				711FABF01FBF559F0074927B /* Constants.swift in Sources */,
 			);

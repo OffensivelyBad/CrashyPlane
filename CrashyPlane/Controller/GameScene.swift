@@ -11,11 +11,11 @@ import GameplayKit
 
 class GameScene: SKScene {
     
+    // Game state
+    var gameState: GameState!
+    
     // Sprite nodes
     private var player: Player!
-    
-    // Game state
-    private var gameState: GameState!
     
     // Convenience properties
     private var screenWidth: CGFloat {
@@ -40,6 +40,9 @@ extension GameScene {
         
         // Create and add the player
         createPlayer()
+        
+        // Create and add the parallax scrolling background
+        createBackground()
         
         // Setup the physics world
         self.physicsWorld.gravity = CGVector(dx: 0, dy: -5)
@@ -86,6 +89,21 @@ extension GameScene {
         self.player = Player(for: self.screenWidth)
         self.player.position = CGPoint(x: self.leftPadding, y: self.topPadding)
         self.addChild(self.player)
+    }
+    
+    private func createBackground() {
+        let skyNodes = Background.getBackgroundNodes(screenWidth: self.screenWidth, image: Constants.skyBackgroundImageName, y: 0, z: Positions.skyBackgroundZPosition, needsPhysics: false)
+        let groundNodes = Background.getBackgroundNodes(screenWidth: self.screenWidth, image: Constants.groundBackgroundImageName, y: -(self.screenHeight / 2), z: Positions.groundBackgroundZPosition, needsPhysics: true)
+        
+        for node in skyNodes {
+            self.addChild(node)
+            Background.scrollBackgroundNode(node: node, screenWidth: self.screenWidth, duration: Constants.skyBackgroundScrollDuration)
+        }
+        for node in groundNodes {
+            self.addChild(node)
+            Background.scrollBackgroundNode(node: node, screenWidth: self.screenWidth, duration: Constants.groundBackgroundScrollDuration)
+        }
+        
     }
     
 }

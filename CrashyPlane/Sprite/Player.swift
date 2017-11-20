@@ -16,6 +16,8 @@ class Player: SKSpriteNode {
         super.init(texture: texture, color: UIColor.clear, size: texture.size())
         resizePlayer(for: width)
         self.physicsBody = SKPhysicsBody(texture: texture, size: texture.size())
+        self.physicsBody?.categoryBitMask = PhysicsCategory.Player
+        self.zPosition = Positions.playerZPosition
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -35,7 +37,7 @@ class Player: SKSpriteNode {
     public func applyImpulseToAcceleratePlayer() {
         // Prevent extremely high Y acceleration
         guard let velocity = self.physicsBody?.velocity, velocity.dy < Constants.maxPlayerVelocity else { return }
-        let impulse = SKAction.applyImpulse(CGVector(dx: 0, dy: 10), duration: 0.1)
+        let impulse = SKAction.applyImpulse(CGVector(dx: 0, dy: Constants.playerImpulse), duration: 0.1)
         self.run(impulse)
     }
     
