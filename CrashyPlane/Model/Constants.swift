@@ -12,9 +12,19 @@ struct Constants {
     
     // File names
     static let playerImageName = "plane"
+    static let skyBackgroundImageName = "sky"
+    static let groundBackgroundImageName = "ground"
     
     // Sizes
     static let playerPercentSizeOfScreen: CGFloat = 0.08
     static let enemyPercentSizeOfScreen: CGFloat = 0.08
+    
+    // Physics
+    static let maxPlayerVelocity: CGFloat = 1000
+    static let playerImpulse: CGFloat = 12
+    
+    // Event durations
+    static let skyBackgroundScrollDuration: TimeInterval = 10
+    static let groundBackgroundScrollDuration: TimeInterval = 6
     
 }
