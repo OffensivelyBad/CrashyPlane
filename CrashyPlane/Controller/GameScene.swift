@@ -46,6 +46,9 @@ extension GameScene {
         
         // Setup the physics world
         self.physicsWorld.gravity = CGVector(dx: 0, dy: -5)
+        
+        // Begin creating obstacles
+        self.gameState.createTimerForObstacle(interval: Constants.obstacleCreation)
     }
     
     override func willMove(from view: SKView) {
@@ -103,6 +106,22 @@ extension GameScene {
             self.addChild(node)
             Background.scrollBackgroundNode(node: node, screenWidth: self.screenWidth, duration: Constants.groundBackgroundScrollDuration)
         }
+        
+    }
+    
+}
+
+// MARK: - GameStateDelegate
+extension GameScene: GameStateDelegate {
+    
+    public func createObstacle() {
+        
+        // Create and add a random obstacle
+        let obstacle = Obstacle.getRandomObstacle(screenWidth: self.screenWidth, screenHeight: self.screenHeight)
+        self.addChild(obstacle)
+        
+        // Move the obstacle
+        Obstacle.moveObstacle(node: obstacle)
         
     }
     

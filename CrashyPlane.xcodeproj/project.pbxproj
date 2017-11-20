@@ -21,6 +21,7 @@
 		71DAB3491FC341E80099991C /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DAB3481FC341E80099991C /* GameState.swift */; };
 		71DAB34D1FC3554F0099991C /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DAB34C1FC3554F0099991C /* Background.swift */; };
 		71DAB34F1FC359A50099991C /* Positions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DAB34E1FC359A50099991C /* Positions.swift */; };
+		71DAB3511FC3698E0099991C /* Obstacle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DAB3501FC3698E0099991C /* Obstacle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		71DAB3481FC341E80099991C /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
 		71DAB34C1FC3554F0099991C /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 		71DAB34E1FC359A50099991C /* Positions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Positions.swift; sourceTree = "<group>"; };
+		71DAB3501FC3698E0099991C /* Obstacle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Obstacle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 			children = (
 				71DAB3441FC340950099991C /* Player.swift */,
 				71DAB34C1FC3554F0099991C /* Background.swift */,
+				71DAB3501FC3698E0099991C /* Obstacle.swift */,
 			);
 			path = Sprite;
 			sourceTree = "<group>";
@@ -199,6 +202,7 @@
 			files = (
 				711FABD71FBE26B90074927B /* GameScene.swift in Sources */,
 				711FABEE1FBF550C0074927B /* PhysicsCategory.swift in Sources */,
+				71DAB3511FC3698E0099991C /* Obstacle.swift in Sources */,
 				711FABD91FBE26B90074927B /* GameViewController.swift in Sources */,
 				71DAB3451FC340950099991C /* Player.swift in Sources */,
 				71DAB34F1FC359A50099991C /* Positions.swift in Sources */,

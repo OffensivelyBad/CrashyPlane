@@ -22,7 +22,7 @@ class GameViewController: UIViewController {
                 scene.scaleMode = .aspectFill
                 
                 // Inject dependencies
-                scene.gameState = GameState()
+                scene.gameState = GameState(delegate: scene)
                 
                 // Present the scene
                 view.presentScene(scene)

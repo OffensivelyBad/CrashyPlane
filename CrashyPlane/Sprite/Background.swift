@@ -1,5 +1,5 @@
 //
-//  BackgroundProtocol.swift
+//  Background.swift
 //  CrashyPlane
 //
 //  Created by Shawn Roller on 11/20/17.
@@ -9,7 +9,7 @@
 import UIKit
 import SpriteKit
 
-class Background: SKSpriteNode {
+struct Background {
     
     static public func getBackgroundNodes(screenWidth: CGFloat, image: String, y: CGFloat, z: CGFloat, needsPhysics: Bool) -> [SKSpriteNode] {
         // Create background nodes that will scroll forever
