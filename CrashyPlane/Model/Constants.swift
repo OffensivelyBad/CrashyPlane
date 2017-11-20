@@ -17,4 +17,7 @@ struct Constants {
     static let playerPercentSizeOfScreen: CGFloat = 0.08
     static let enemyPercentSizeOfScreen: CGFloat = 0.08
     
+    // Physics
+    static let maxPlayerVelocity: CGFloat = 1000
+    
 }

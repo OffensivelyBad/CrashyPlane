@@ -11,31 +11,51 @@ import GameplayKit
 
 class GameScene: SKScene {
     
-    var sceneManager: GameSceneManager?
-    var interactionManager: GameInteractionManager?
+    // Sprite nodes
+    private var player: Player!
     
-    // Nodes
-    let player = SKSpriteNode(imageNamed: Constants.playerImageName)
+    // Game state
+    private var gameState: GameState!
+    
+    // Convenience properties
+    private var screenWidth: CGFloat {
+        return self.size.width
+    }
+    private var screenHeight: CGFloat {
+        return self.size.height
+    }
+    private var leftPadding: CGFloat {
+        return -(self.screenWidth / 2) + (self.player.size.width * 1)
+    }
+    private var topPadding: CGFloat {
+        return (self.screenHeight / 2) - (self.player.size.height * 1)
+    }
+    
+}
+
+// MARK: - Init and deinit
+extension GameScene {
     
     override func didMove(to view: SKView) {
         
-        // Setup the scene manager
-        self.sceneManager = GameSceneManager(scene: self, player: self.player)
+        // Create and add the player
+        createPlayer()
         
-        // Setup the interaction manager
-        self.interactionManager = GameInteractionManager(player: self.player)
-        
+        // Setup the physics world
+        self.physicsWorld.gravity = CGVector(dx: 0, dy: -5)
     }
     
     override func willMove(from view: SKView) {
         super.willMove(from: view)
-        
-        // Destroy the managers
-        self.sceneManager = nil
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {        
-        self.interactionManager?.touchesBegan(touches, with: event)
+}
+
+// MARK: - Handle touches
+extension GameScene {
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.gameState.touchingScreen = true
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -43,7 +63,7 @@ class GameScene: SKScene {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.interactionManager?.touchesEnded(touches, with: event)
+        self.gameState.touchingScreen = false
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -51,6 +71,21 @@ class GameScene: SKScene {
     }
     
     override func update(_ currentTime: TimeInterval) {
-        self.interactionManager?.update(currentTime)
+        // Accelerate the player
+        if self.gameState.touchingScreen {
+            self.player.applyImpulseToAcceleratePlayer()
+        }
     }
+    
+}
+
+// MARK: - Node management
+extension GameScene {
+    
+    private func createPlayer() {
+        self.player = Player(for: self.screenWidth)
+        self.player.position = CGPoint(x: self.leftPadding, y: self.topPadding)
+        self.addChild(self.player)
+    }
+    
 }
