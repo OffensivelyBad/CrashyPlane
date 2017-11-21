@@ -10,6 +10,8 @@ import UIKit
 
 struct Constants {
     
+    private init() {}
+    
     // File names
     static let playerImageName = "plane"
     static let skyBackgroundImageName = "sky"

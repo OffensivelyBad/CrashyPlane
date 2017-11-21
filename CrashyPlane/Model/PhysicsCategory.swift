@@ -10,6 +10,8 @@ import Foundation
 
 struct PhysicsCategory {
     
+    private init() {}
+    
     static let Player: UInt32 = 0x1 << 0
     
 }

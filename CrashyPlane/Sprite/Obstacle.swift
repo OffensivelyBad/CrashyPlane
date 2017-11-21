@@ -12,6 +12,8 @@ import GameplayKit
 
 struct Obstacle {
     
+    private init() {}
+    
     static public func getRandomObstacle(screenWidth: CGFloat, screenHeight: CGFloat) -> SKSpriteNode {
         
         // Get a random obstacle

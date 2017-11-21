@@ -11,6 +11,8 @@ import SpriteKit
 
 struct Background {
     
+    private init() {}
+    
     static public func getBackgroundNodes(screenWidth: CGFloat, image: String, y: CGFloat, z: CGFloat, needsPhysics: Bool) -> [SKSpriteNode] {
         // Create background nodes that will scroll forever
         var nodes = [SKSpriteNode]()
