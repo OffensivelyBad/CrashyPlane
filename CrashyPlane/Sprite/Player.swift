@@ -15,9 +15,15 @@ class Player: SKSpriteNode {
         let texture = SKTexture(imageNamed: Constants.playerImageName)
         super.init(texture: texture, color: UIColor.clear, size: texture.size())
         resizePlayer(for: width)
-        self.physicsBody = SKPhysicsBody(texture: texture, size: texture.size())
+        let size = CGSize(width: self.size.width, height: self.size.height)
+        self.physicsBody = SKPhysicsBody(texture: texture, size: size)
+//        self.physicsBody = SKPhysicsBody(texture: texture, size: texture.size())
         self.physicsBody?.categoryBitMask = PhysicsCategory.Player
         self.zPosition = Positions.playerZPosition
+        
+        // Collisions with ground and obstacles should be notified
+        self.physicsBody?.contactTestBitMask = PhysicsCategory.Ground | PhysicsCategory.Obstacle
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -37,7 +43,8 @@ class Player: SKSpriteNode {
     public func applyImpulseToAcceleratePlayer() {
         // Prevent extremely high Y acceleration
         guard let velocity = self.physicsBody?.velocity, velocity.dy < Constants.maxPlayerVelocity else { return }
-        let impulse = SKAction.applyImpulse(CGVector(dx: 0, dy: Constants.playerImpulse), duration: 0.1)
+//        let impulse = SKAction.applyImpulse(CGVector(dx: 0, dy: Constants.playerImpulse), duration: 0.1)
+        let impulse = SKAction.applyImpulse(CGVector(dx: 0, dy: Constants.playerImpulse * Constants.playerPercentSizeOfScreen), duration: 0.1)
         self.run(impulse)
     }
     

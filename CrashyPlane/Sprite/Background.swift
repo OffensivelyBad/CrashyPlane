@@ -24,6 +24,13 @@ struct Background {
             let yPosition = y == 0 ? 0 : y + (node.size.height / 2)
             node.position = CGPoint(x: (node.size.width - 1) * CGFloat(i), y: yPosition)
             node.zPosition = z
+            
+            if needsPhysics {
+                node.physicsBody = SKPhysicsBody(texture: node.texture!, size: node.texture!.size())
+                node.physicsBody?.isDynamic = false
+                node.physicsBody?.categoryBitMask = PhysicsCategory.Ground
+            }
+            
             nodes.append(node)
         }
         return nodes

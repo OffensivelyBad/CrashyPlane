@@ -6,6 +6,21 @@
 //  Copyright © 2017 Shawn Roller. All rights reserved.
 //
 
+/*
+ 
+ // TODO
+ 
+ make obstacles collide with each other
+ zoom in on explosions
+ slow down time when explosions occur
+ make a game over scene
+ ability to restart the game
+ add scoring mechanism
+ prevent player from leaving the screen too high
+ remove obstacles when they leave the screen
+ 
+ */
+
 import SpriteKit
 import GameplayKit
 
@@ -13,6 +28,9 @@ class GameScene: SKScene {
     
     // Game state
     var gameState: GameState!
+    
+    // Manage collisions via delegate
+    var collisionManager: GameSceneCollisionManager!
     
     // Sprite nodes
     private var player: Player!
@@ -46,6 +64,9 @@ extension GameScene {
         
         // Setup the physics world
         self.physicsWorld.gravity = CGVector(dx: 0, dy: -5)
+        
+        // Delegate collisions to the collision manager
+        self.physicsWorld.contactDelegate = self.collisionManager
         
         // Begin creating obstacles
         self.gameState.createTimerForObstacle(interval: Constants.obstacleCreation)
@@ -126,3 +147,13 @@ extension GameScene: GameStateDelegate {
     }
     
 }
+
+// MARK: - Collision Delegate
+extension GameScene: CollisionDelegate {
+    
+    func addNode(_ node: SKNode) {
+        self.addChild(node)
+    }
+    
+}
+

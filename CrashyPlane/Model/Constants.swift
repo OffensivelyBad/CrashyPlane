@@ -19,6 +19,8 @@ struct Constants {
     static let enemyOneImageName = "enemy-plane"
     static let enemyTwoImageName = "enemy-mine"
     static let allEnemies = [Constants.enemyOneImageName, Constants.enemyTwoImageName]
+    static let playerExplosion = "PlayerExplosion"
+    static let enemyExplosion = "EnemyExplosion"
     
     // Sizes
     static let playerPercentSizeOfScreen: CGFloat = 0.08
@@ -26,7 +28,7 @@ struct Constants {
     
     // Physics
     static let maxPlayerVelocity: CGFloat = 1000
-    static let playerImpulse: CGFloat = 12
+    static let playerImpulse: CGFloat = 40
     
     // Event durations
     static let skyBackgroundScrollDuration: TimeInterval = 10
