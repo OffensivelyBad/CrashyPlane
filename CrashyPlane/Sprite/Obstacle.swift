@@ -14,7 +14,7 @@ struct Obstacle {
     
     private init() {}
     
-    static public func getRandomObstacle(screenWidth: CGFloat, screenHeight: CGFloat) -> SKSpriteNode {
+    static public func getRandomObstacleWithCollisionBlock(screenWidth: CGFloat, screenHeight: CGFloat) -> SKSpriteNode {
         
         // Get a random obstacle
         let randomObstacle = GKRandomDistribution(lowestValue: 0, highestValue: Constants.allEnemies.count - 1)
@@ -29,7 +29,7 @@ struct Obstacle {
         obstacle.position.x = screenWidth
         
         // Size the obstacle appropriately for the screen
-        resizeObstacle(obstacle, for: screenWidth)
+        NodeCustomizer.resizeNode(obstacle, for: screenWidth)
         
         // Put it in a random Y position
         let randomY = GKRandomDistribution(lowestValue: Int(-(screenHeight / 4)), highestValue: Int(screenHeight / 2))
@@ -38,8 +38,24 @@ struct Obstacle {
         // Add physics
         let size = CGSize(width: obstacle.size.width, height: obstacle.size.height)
         obstacle.physicsBody = SKPhysicsBody(texture: obstacle.texture!, size: size)
-        obstacle.physicsBody?.isDynamic = false
+        obstacle.physicsBody?.affectedByGravity = false
         obstacle.physicsBody?.categoryBitMask = PhysicsCategory.Obstacle
+        
+        // Make obstacles collide with one another
+        obstacle.physicsBody?.contactTestBitMask = PhysicsCategory.Obstacle | PhysicsCategory.Coin
+        obstacle.physicsBody?.collisionBitMask = PhysicsCategory.Obstacle | PhysicsCategory.Coin
+        
+        // Make a collision block that will be used for scoring
+        let collisionSize = CGSize(width: 10, height: screenHeight * 2)
+        let collision = SKSpriteNode(color: .clear, size: collisionSize)
+        collision.physicsBody = SKPhysicsBody(rectangleOf: collision.size)
+        collision.physicsBody?.isDynamic = false
+        collision.physicsBody?.categoryBitMask = PhysicsCategory.PassedObstacle
+        collision.position.y = 0
+        collision.position.x = obstacle.size.width
+        
+        // Add the collision block to the obstacle
+        obstacle.addChild(collision)
         
         return obstacle
     }
@@ -48,21 +64,16 @@ struct Obstacle {
         
         var duration = Constants.obstacleMovement
         
+        // If it's the first enemy make the obstacle move more quicly across the screen
         if node.name == Constants.enemyOneImageName {
-            // Make the first enemy move faster
             duration = duration / 1.5
         }
         
+        // Move the obstacle across the screen
         let xPosition = -node.position.x
         let xMovement = SKAction.moveTo(x: xPosition, duration: duration)
         node.run(xMovement)
         
-    }
-    
-    private static func resizeObstacle(_ obstacle: SKSpriteNode, for width: CGFloat) {
-        let aspectRatio = obstacle.size.width / obstacle.size.height
-        let obstacleWidth = width * Constants.playerPercentSizeOfScreen
-        obstacle.size = CGSize(width: obstacleWidth, height: obstacleWidth / aspectRatio)
     }
     
 }

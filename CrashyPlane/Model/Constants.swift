@@ -21,6 +21,7 @@ struct Constants {
     static let allEnemies = [Constants.enemyOneImageName, Constants.enemyTwoImageName]
     static let playerExplosion = "PlayerExplosion"
     static let enemyExplosion = "EnemyExplosion"
+    static let coinName = "coin"
     
     // Sizes
     static let playerPercentSizeOfScreen: CGFloat = 0.08
@@ -35,5 +36,15 @@ struct Constants {
     static let groundBackgroundScrollDuration: TimeInterval = 6
     static let obstacleMovement: TimeInterval = 6
     static let obstacleCreation: TimeInterval = 1.5
+    static let obstacleCollisionDelay: TimeInterval = 0.25
+    static let coinMovement: TimeInterval = 7
+    
+    // Scoring
+    static let passedObstacleScore = 1
+    static let collectedCoinScore = 3
+    static let enemiesPerCoin = 3
+    
+    // Fonts
+    static let scoreLabelFont = "Baskerville-Bold"
     
 }

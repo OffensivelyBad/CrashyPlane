@@ -12,12 +12,17 @@ import SpriteKit
 protocol CollisionDelegate {
     func addNode(_ node: SKNode)
 }
+protocol ScoringDelegate {
+    func addPointsToScore(_ score: Int)
+}
 
 class GameSceneCollisionManager: NSObject, SKPhysicsContactDelegate {
     
-    var delegate: CollisionDelegate!
-    init(delegate: CollisionDelegate) {
-        self.delegate = delegate
+    let collisionDelegate: CollisionDelegate!
+    let scoringDelegate: ScoringDelegate!
+    init(collisionDelegate: CollisionDelegate, scoringDelegate: ScoringDelegate) {
+        self.collisionDelegate = collisionDelegate
+        self.scoringDelegate = scoringDelegate
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
@@ -40,32 +45,83 @@ class GameSceneCollisionManager: NSObject, SKPhysicsContactDelegate {
         guard let firstBody = firstNode.physicsBody, let secondBody = secondNode.physicsBody else { return }
         
         switch (firstBody.categoryBitMask, secondBody.categoryBitMask) {
-        case (PhysicsCategory.Player, PhysicsCategory.Ground), (PhysicsCategory.Player, PhysicsCategory.Obstacle):
-            playerNode(firstNode, hitBy: secondNode)
+        case (PhysicsCategory.Player, PhysicsCategory.Ground):
+            playerHitGround(firstNode, groundNode: secondNode)
+        case (PhysicsCategory.Player, PhysicsCategory.Obstacle):
+            playerHitObstacle(playerNode: firstNode, obstacleNode: secondNode)
+        case (PhysicsCategory.Obstacle, PhysicsCategory.Obstacle), (PhysicsCategory.Obstacle, PhysicsCategory.Coin):
+            obstacleHitObstacle(firstNode: firstNode, secondNode: secondNode)
+        case (PhysicsCategory.Player, PhysicsCategory.PassedObstacle):
+            playerPassedObstacle(secondNode)
+        case (PhysicsCategory.Player, PhysicsCategory.Coin):
+            playerCollectedCoin(secondNode)
         default:
             ()
         }
         
     }
     
-    private func playerNode(_ node: SKNode, hitBy secondNode: SKNode) {
+    private func playerHitObstacle(playerNode: SKNode, obstacleNode: SKNode) {
         
-        guard let secondPhysicsBody = secondNode.physicsBody else { return }
+        guard let playerExplosion = SKEmitterNode(fileNamed: Constants.playerExplosion) else { return }
+        guard let enemyExplosion = SKEmitterNode(fileNamed: Constants.enemyExplosion) else { return }
+        
+        // Remove the player in a blaze of glory
+        playerExplosion.position = playerNode.position
+        self.collisionDelegate.addNode(playerExplosion)
+        playerNode.removeFromParent()
+        
+        // Remove the obstacle
+        enemyExplosion.position = obstacleNode.position
+        self.collisionDelegate.addNode(enemyExplosion)
+        obstacleNode.removeFromParent()
+        
+    }
+    
+    private func playerHitGround(_ playerNode: SKNode, groundNode: SKNode) {
+        
         guard let playerExplosion = SKEmitterNode(fileNamed: Constants.playerExplosion) else { return }
         
         // Remove the player in a blaze of glory
-        playerExplosion.position = node.position
-        self.delegate.addNode(playerExplosion)
-        node.removeFromParent()
+        playerExplosion.position = playerNode.position
+        self.collisionDelegate.addNode(playerExplosion)
+        playerNode.removeFromParent()
         
-        // Remove the obstacle if that's what was hit
-        if secondPhysicsBody.categoryBitMask == PhysicsCategory.Obstacle {
-            guard let enemyExplosion = SKEmitterNode(fileNamed: Constants.enemyExplosion) else { return }
+    }
+    
+    private func obstacleHitObstacle(firstNode: SKNode, secondNode: SKNode) {
+        
+        guard let enemyExplosion = SKEmitterNode(fileNamed: Constants.enemyExplosion) else { return }
+        
+        // Make the obstacles hit each other and then explode after a brief delay
+        let wait = SKAction.wait(forDuration: Constants.obstacleCollisionDelay)
+        let firstExplosion = SKAction.run {
+            enemyExplosion.position = firstNode.position
+            self.collisionDelegate.addNode(enemyExplosion)
+            firstNode.removeFromParent()
+        }
+        let secondExplosion = SKAction.run {
             enemyExplosion.position = secondNode.position
-            self.delegate.addNode(enemyExplosion)
+            self.collisionDelegate.addNode(enemyExplosion.copy() as! SKNode)
             secondNode.removeFromParent()
         }
+        firstNode.run(SKAction.sequence([wait, firstExplosion]))
+        secondNode.run(SKAction.sequence([wait, secondExplosion]))
         
+    }
+    
+    private func playerPassedObstacle(_ scoringNode: SKNode) {
+        // Remove the scoring node to prevent scores from racking up more than once
+        scoringNode.removeFromParent()
+        // Add points to the score
+        self.scoringDelegate.addPointsToScore(Constants.passedObstacleScore)
+    }
+    
+    private func playerCollectedCoin(_ scoringNode: SKNode) {
+        // Remove the coin node to prevent scores from racking up more than once
+        scoringNode.removeFromParent()
+        // Add points to the score
+        self.scoringDelegate.addPointsToScore(Constants.collectedCoinScore)
     }
     
 }
