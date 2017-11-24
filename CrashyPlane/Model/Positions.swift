@@ -10,8 +10,13 @@ import UIKit
 
 struct Positions {
     
+    private init() {}
+    
     static let skyBackgroundZPosition: CGFloat = -3
+    static let obstacleZPosition: CGFloat = -2
     static let groundBackgroundZPosition: CGFloat = -1
     static let playerZPosition: CGFloat = 1
+    static let scoringLabelZPosition: CGFloat = 10
+    static let coinZPosition: CGFloat = -2
     
 }
