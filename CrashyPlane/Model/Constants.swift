@@ -23,6 +23,10 @@ struct Constants {
     static let enemyExplosion = "EnemyExplosion"
     static let coinName = "coin"
     
+    // Sounds
+    static let explosionSoundName = "explosion.wav"
+    static let scoreSoundName = "score.wav"
+    
     // Sizes
     static let playerPercentSizeOfScreen: CGFloat = 0.08
     static let enemyPercentSizeOfScreen: CGFloat = 0.08

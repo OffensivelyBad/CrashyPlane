@@ -30,6 +30,7 @@
 		71DAB34D1FC3554F0099991C /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DAB34C1FC3554F0099991C /* Background.swift */; };
 		71DAB34F1FC359A50099991C /* Positions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DAB34E1FC359A50099991C /* Positions.swift */; };
 		71DAB3511FC3698E0099991C /* Obstacle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DAB3501FC3698E0099991C /* Obstacle.swift */; };
+		71EE55D71FD74F310065DA91 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71EE55D61FD74F310065DA91 /* AudioManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		71DAB34C1FC3554F0099991C /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 		71DAB34E1FC359A50099991C /* Positions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Positions.swift; sourceTree = "<group>"; };
 		71DAB3501FC3698E0099991C /* Obstacle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Obstacle.swift; sourceTree = "<group>"; };
+		71EE55D61FD74F310065DA91 /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +144,7 @@
 				71D6FB331FC8B5EB00F8FEF9 /* explosion.wav */,
 				71D6FB341FC8B5EB00F8FEF9 /* pixelland.mp3 */,
 				71D6FB351FC8B5EB00F8FEF9 /* score.wav */,
+				71EE55D61FD74F310065DA91 /* AudioManager.swift */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -245,6 +248,7 @@
 				71D6FB3C1FC8B8D900F8FEF9 /* NodeCustomizer.swift in Sources */,
 				71DAB3451FC340950099991C /* Player.swift in Sources */,
 				71D6FB3A1FC8B77700F8FEF9 /* Coin.swift in Sources */,
+				71EE55D71FD74F310065DA91 /* AudioManager.swift in Sources */,
 				71DAB34F1FC359A50099991C /* Positions.swift in Sources */,
 				711FABD11FBE26B90074927B /* AppDelegate.swift in Sources */,
 				71DAB34D1FC3554F0099991C /* Background.swift in Sources */,

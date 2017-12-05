@@ -23,7 +23,7 @@ class GameViewController: UIViewController {
                 
                 // Inject dependencies
                 scene.gameState = GameState(delegate: scene)
-                scene.collisionManager = GameSceneCollisionManager(collisionDelegate: scene, scoringDelegate: scene.gameState)
+                scene.collisionManager = GameSceneCollisionManager(collisionDelegate: scene, scoringDelegate: scene.gameState, audioDelegate: scene)
                 
                 // Present the scene
                 view.presentScene(scene)
