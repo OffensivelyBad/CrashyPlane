@@ -26,6 +26,7 @@ struct Constants {
     // Sounds
     static let explosionSoundName = "explosion.wav"
     static let scoreSoundName = "score.wav"
+    static let musicName = "pixelland.mp3"
     
     // Sizes
     static let playerPercentSizeOfScreen: CGFloat = 0.08
