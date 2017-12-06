@@ -9,11 +9,11 @@
 import Foundation
 import SpriteKit
 
-protocol AudioManager where Self: SKScene {
+protocol AudioManager {
     func playSoundFileNamed(_ name: String)
 }
 
-extension AudioManager {
+extension AudioManager where Self: SKScene {
     func playSoundFileNamed(_ name: String) {
         self.run(SKAction.playSoundFileNamed(name, waitForCompletion: false))
     }
