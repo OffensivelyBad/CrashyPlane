@@ -20,9 +20,11 @@ class GameSceneCollisionManager: NSObject, SKPhysicsContactDelegate {
     
     let collisionDelegate: CollisionDelegate!
     let scoringDelegate: ScoringDelegate!
-    init(collisionDelegate: CollisionDelegate, scoringDelegate: ScoringDelegate) {
+    let audioDelegate: AudioManager!
+    init(collisionDelegate: CollisionDelegate, scoringDelegate: ScoringDelegate, audioDelegate: AudioManager) {
         self.collisionDelegate = collisionDelegate
         self.scoringDelegate = scoringDelegate
+        self.audioDelegate = audioDelegate
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
@@ -66,6 +68,9 @@ class GameSceneCollisionManager: NSObject, SKPhysicsContactDelegate {
         guard let playerExplosion = SKEmitterNode(fileNamed: Constants.playerExplosion) else { return }
         guard let enemyExplosion = SKEmitterNode(fileNamed: Constants.enemyExplosion) else { return }
         
+        // Play a sound effect
+        self.audioDelegate.playSoundFileNamed(Constants.explosionSoundName)
+        
         // Remove the player in a blaze of glory
         playerExplosion.position = playerNode.position
         self.collisionDelegate.addNode(playerExplosion)
@@ -82,6 +87,9 @@ class GameSceneCollisionManager: NSObject, SKPhysicsContactDelegate {
         
         guard let playerExplosion = SKEmitterNode(fileNamed: Constants.playerExplosion) else { return }
         
+        // Play a sound effect
+        self.audioDelegate.playSoundFileNamed(Constants.explosionSoundName)
+        
         // Remove the player in a blaze of glory
         playerExplosion.position = playerNode.position
         self.collisionDelegate.addNode(playerExplosion)
@@ -92,6 +100,9 @@ class GameSceneCollisionManager: NSObject, SKPhysicsContactDelegate {
     private func obstacleHitObstacle(firstNode: SKNode, secondNode: SKNode) {
         
         guard let enemyExplosion = SKEmitterNode(fileNamed: Constants.enemyExplosion) else { return }
+        
+        // Play a sound effect
+        self.audioDelegate.playSoundFileNamed(Constants.explosionSoundName)
         
         // Make the obstacles hit each other and then explode after a brief delay
         let wait = SKAction.wait(forDuration: Constants.obstacleCollisionDelay)
@@ -111,6 +122,10 @@ class GameSceneCollisionManager: NSObject, SKPhysicsContactDelegate {
     }
     
     private func playerPassedObstacle(_ scoringNode: SKNode) {
+        
+        // Play a sound effect
+        self.audioDelegate.playSoundFileNamed(Constants.scoreSoundName)
+        
         // Remove the scoring node to prevent scores from racking up more than once
         scoringNode.removeFromParent()
         // Add points to the score
@@ -118,6 +133,10 @@ class GameSceneCollisionManager: NSObject, SKPhysicsContactDelegate {
     }
     
     private func playerCollectedCoin(_ scoringNode: SKNode) {
+        
+        // Play a sound effect
+        self.audioDelegate.playSoundFileNamed(Constants.scoreSoundName)
+        
         // Remove the coin node to prevent scores from racking up more than once
         scoringNode.removeFromParent()
         // Add points to the score
@@ -125,3 +144,6 @@ class GameSceneCollisionManager: NSObject, SKPhysicsContactDelegate {
     }
     
 }
+
+
+

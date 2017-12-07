@@ -27,7 +27,7 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene {
+class GameScene: SKScene, AudioManager {
     
     // Game state
     var gameState: GameState!
@@ -40,6 +40,9 @@ class GameScene: SKScene {
     
     private var enemiesCreated = 0
     private var coinsCreated = 0
+    
+    // Music
+    private var musicNode = SKAudioNode(fileNamed: Constants.musicName)
     
     // Convenience properties
     private var screenWidth: CGFloat {
@@ -90,6 +93,16 @@ extension GameScene {
         
         // Begin creating obstacles
         self.gameState.createTimerForObstacle(interval: Constants.obstacleCreation)
+        
+        // Begin playing music
+        self.addNode(self.musicNode)
+        
+    }
+    
+    private func endGame() {
+        
+        // Stop music
+        self.musicNode.removeFromParent()
         
     }
     
