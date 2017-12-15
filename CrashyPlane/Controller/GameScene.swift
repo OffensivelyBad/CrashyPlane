@@ -27,7 +27,13 @@
 import SpriteKit
 import GameplayKit
 
+protocol GameSceneDelegate {
+    func restartGame()
+}
+
 class GameScene: SKScene, AudioManager {
+    
+    var gameSceneDelegate: GameSceneDelegate!
     
     // Game state
     var gameState: GameState!
@@ -106,12 +112,23 @@ extension GameScene {
         
     }
     
+    private func restartGame() {
+        
+        self.gameSceneDelegate.restartGame()
+        
+    }
+    
 }
 
 // MARK: - Handle touches
 extension GameScene {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        if self.gameState.gameOver {
+            restartGame()
+            return
+        }
         
         if !self.gameState.gameDidBegin {
             startGame()

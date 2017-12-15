@@ -72,7 +72,9 @@ struct Obstacle {
         // Move the obstacle across the screen
         let xPosition = -node.position.x
         let xMovement = SKAction.moveTo(x: xPosition, duration: duration)
-        node.run(xMovement)
+        let remove = SKAction.removeFromParent()
+        let sequence = SKAction.sequence([xMovement, remove])
+        node.run(sequence)
         
     }
     

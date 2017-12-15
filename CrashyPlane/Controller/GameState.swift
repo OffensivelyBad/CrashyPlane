@@ -30,6 +30,7 @@ class GameState {
     // Rules
     let applyTouchImpulse = true
     var gameDidBegin = false
+    var gameOver = false
     
     // Interactions
     var touchingScreen = false
@@ -67,6 +68,10 @@ extension GameState: ScoringDelegate {
     
     func addPointsToScore(_ score: Int) {
         self.score += score
+    }
+    
+    func gameEnded() {
+        self.gameOver = true
     }
     
 }
