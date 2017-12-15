@@ -43,6 +43,8 @@ struct Constants {
     static let obstacleCreation: TimeInterval = 1.5
     static let obstacleCollisionDelay: TimeInterval = 0.25
     static let coinMovement: TimeInterval = 7
+    static let playerExplosionDuration: TimeInterval = 2.5
+    static let obstacleExplosionDuration: TimeInterval = 1
     
     // Scoring
     static let passedObstacleScore = 1

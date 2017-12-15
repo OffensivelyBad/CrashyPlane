@@ -15,25 +15,7 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let view = self.view as! SKView? {
-            // Load the SKScene from 'GameScene.sks'
-            if let scene = SKScene(fileNamed: "GameScene") as? GameScene {
-                // Set the scale mode to scale to fit the window
-                scene.scaleMode = .aspectFill
-                
-                // Inject dependencies
-                scene.gameState = GameState(delegate: scene)
-                scene.collisionManager = GameSceneCollisionManager(collisionDelegate: scene, scoringDelegate: scene.gameState, audioDelegate: scene)
-                
-                // Present the scene
-                view.presentScene(scene)
-            }
-            
-            view.ignoresSiblingOrder = true
-            
-            view.showsFPS = true
-            view.showsNodeCount = true
-        }
+        startGame()
     }
 
     override var shouldAutorotate: Bool {
@@ -56,4 +38,40 @@ class GameViewController: UIViewController {
     override var prefersStatusBarHidden: Bool {
         return true
     }
+    
+    private func startGame() {
+        
+        if let view = self.view as! SKView? {
+            // Load the SKScene from 'GameScene.sks'
+            if let scene = SKScene(fileNamed: "GameScene") as? GameScene {
+                
+                scene.gameSceneDelegate = self
+                
+                // Set the scale mode to scale to fit the window
+                scene.scaleMode = .aspectFill
+                
+                // Inject dependencies
+                scene.gameState = GameState(delegate: scene)
+                scene.collisionManager = GameSceneCollisionManager(collisionDelegate: scene, scoringDelegate: scene.gameState, audioDelegate: scene)
+                
+                // Present the scene
+                view.presentScene(scene)
+            }
+            
+            view.ignoresSiblingOrder = true
+            
+            view.showsFPS = true
+            view.showsNodeCount = true
+        }
+        
+    }
+
+}
+
+extension GameViewController: GameSceneDelegate {
+    
+    func restartGame() {
+        startGame()
+    }
+    
 }

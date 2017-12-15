@@ -14,6 +14,7 @@ protocol CollisionDelegate {
 }
 protocol ScoringDelegate {
     func addPointsToScore(_ score: Int)
+    func gameEnded()
 }
 
 class GameSceneCollisionManager: NSObject, SKPhysicsContactDelegate {
@@ -72,14 +73,28 @@ class GameSceneCollisionManager: NSObject, SKPhysicsContactDelegate {
         self.audioDelegate.playSoundFileNamed(Constants.explosionSoundName)
         
         // Remove the player in a blaze of glory
-        playerExplosion.position = playerNode.position
-        self.collisionDelegate.addNode(playerExplosion)
-        playerNode.removeFromParent()
+        let explosionWait = SKAction.wait(forDuration: Constants.playerExplosionDuration)
+        let playerExplosionAction = SKAction.run {
+            playerExplosion.position = playerNode.position
+            self.collisionDelegate.addNode(playerExplosion)
+            playerNode.removeFromParent()
+            playerExplosion.run(SKAction.sequence([explosionWait, SKAction.removeFromParent()]))
+        }
         
         // Remove the obstacle
-        enemyExplosion.position = obstacleNode.position
-        self.collisionDelegate.addNode(enemyExplosion)
-        obstacleNode.removeFromParent()
+        let obstacleExplosionWait = SKAction.wait(forDuration: Constants.obstacleExplosionDuration)
+        let enemyExplosionAction = SKAction.run {
+            enemyExplosion.position = obstacleNode.position
+            self.collisionDelegate.addNode(enemyExplosion)
+            obstacleNode.removeFromParent()
+            enemyExplosion.run(SKAction.sequence([obstacleExplosionWait, SKAction.removeFromParent()]))
+        }
+        
+        playerNode.run(playerExplosionAction)
+        obstacleNode.run(enemyExplosionAction)
+        
+        // Set game over
+        self.scoringDelegate.gameEnded()
         
     }
     
@@ -91,9 +106,17 @@ class GameSceneCollisionManager: NSObject, SKPhysicsContactDelegate {
         self.audioDelegate.playSoundFileNamed(Constants.explosionSoundName)
         
         // Remove the player in a blaze of glory
-        playerExplosion.position = playerNode.position
-        self.collisionDelegate.addNode(playerExplosion)
-        playerNode.removeFromParent()
+        let explosionWait = SKAction.wait(forDuration: Constants.playerExplosionDuration)
+        let playerExplosionAction = SKAction.run {
+            playerExplosion.position = playerNode.position
+            self.collisionDelegate.addNode(playerExplosion)
+            playerNode.removeFromParent()
+            playerExplosion.run(SKAction.sequence([explosionWait, SKAction.removeFromParent()]))
+        }
+        playerNode.run(playerExplosionAction)
+        
+        // Set game over
+        self.scoringDelegate.gameEnded()
         
     }
     
@@ -103,18 +126,23 @@ class GameSceneCollisionManager: NSObject, SKPhysicsContactDelegate {
         
         // Play a sound effect
         self.audioDelegate.playSoundFileNamed(Constants.explosionSoundName)
+        let enemyExplosionTwo = enemyExplosion.copy() as! SKEmitterNode
         
         // Make the obstacles hit each other and then explode after a brief delay
         let wait = SKAction.wait(forDuration: Constants.obstacleCollisionDelay)
+        let explosionWait = SKAction.wait(forDuration: Constants.obstacleExplosionDuration)
+        let removeExplosion = SKAction.removeFromParent()
         let firstExplosion = SKAction.run {
             enemyExplosion.position = firstNode.position
             self.collisionDelegate.addNode(enemyExplosion)
             firstNode.removeFromParent()
+            enemyExplosion.run(SKAction.sequence([explosionWait, removeExplosion]))
         }
         let secondExplosion = SKAction.run {
-            enemyExplosion.position = secondNode.position
-            self.collisionDelegate.addNode(enemyExplosion.copy() as! SKNode)
+            enemyExplosionTwo.position = secondNode.position
+            self.collisionDelegate.addNode(enemyExplosionTwo)
             secondNode.removeFromParent()
+            enemyExplosionTwo.run(SKAction.sequence([explosionWait, removeExplosion]))
         }
         firstNode.run(SKAction.sequence([wait, firstExplosion]))
         secondNode.run(SKAction.sequence([wait, secondExplosion]))
