@@ -41,6 +41,13 @@ struct Obstacle {
         obstacle.physicsBody?.affectedByGravity = false
         obstacle.physicsBody?.categoryBitMask = PhysicsCategory.Obstacle
         
+        // Add wind
+        if obstacleName == Constants.enemyOneImageName, let windEmitter = SKEmitterNode(fileNamed: Constants.windName) {
+            windEmitter.particleSpeed = windEmitter.particleSpeed * -1
+            windEmitter.position = CGPoint.zero
+            obstacle.addChild(windEmitter)
+        }
+        
         // Make obstacles collide with one another
         obstacle.physicsBody?.contactTestBitMask = PhysicsCategory.Obstacle | PhysicsCategory.Coin
         obstacle.physicsBody?.collisionBitMask = PhysicsCategory.Obstacle | PhysicsCategory.Coin

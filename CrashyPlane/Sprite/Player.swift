@@ -24,6 +24,11 @@ class Player: SKSpriteNode {
         self.physicsBody?.collisionBitMask = PhysicsCategory.Ground | PhysicsCategory.Obstacle
         self.zPosition = Positions.playerZPosition
         
+        if let wind = SKEmitterNode(fileNamed: Constants.windName) {
+            wind.position = CGPoint.zero
+            self.addChild(wind)
+        }
+        
         // Collisions with ground and obstacles should be notified
         self.physicsBody?.contactTestBitMask = PhysicsCategory.Ground | PhysicsCategory.Obstacle | PhysicsCategory.PassedObstacle | PhysicsCategory.Coin
         
