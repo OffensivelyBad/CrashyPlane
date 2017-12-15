@@ -17,6 +17,7 @@
 		711FABE11FBE26B90074927B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 711FABDF1FBE26B90074927B /* LaunchScreen.storyboard */; };
 		711FABEE1FBF550C0074927B /* PhysicsCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711FABED1FBF550C0074927B /* PhysicsCategory.swift */; };
 		711FABF01FBF559F0074927B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711FABEF1FBF559F0074927B /* Constants.swift */; };
+		714816E61FE45E17009457B1 /* Wind.sks in Resources */ = {isa = PBXBuildFile; fileRef = 714816E51FE45E17009457B1 /* Wind.sks */; };
 		71D6FB2D1FC7220500F8FEF9 /* GameSceneCollisionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D6FB2C1FC7220500F8FEF9 /* GameSceneCollisionManager.swift */; };
 		71D6FB2F1FC72CE100F8FEF9 /* PlayerExplosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 71D6FB2E1FC72CE100F8FEF9 /* PlayerExplosion.sks */; };
 		71D6FB311FC748C500F8FEF9 /* EnemyExplosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 71D6FB301FC748C500F8FEF9 /* EnemyExplosion.sks */; };
@@ -46,6 +47,7 @@
 		711FABE21FBE26B90074927B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		711FABED1FBF550C0074927B /* PhysicsCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsCategory.swift; sourceTree = "<group>"; };
 		711FABEF1FBF559F0074927B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		714816E51FE45E17009457B1 /* Wind.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Wind.sks; sourceTree = "<group>"; };
 		71D6FB2C1FC7220500F8FEF9 /* GameSceneCollisionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneCollisionManager.swift; sourceTree = "<group>"; };
 		71D6FB2E1FC72CE100F8FEF9 /* PlayerExplosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PlayerExplosion.sks; sourceTree = "<group>"; };
 		71D6FB301FC748C500F8FEF9 /* EnemyExplosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = EnemyExplosion.sks; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 				71D6FB301FC748C500F8FEF9 /* EnemyExplosion.sks */,
 				711FABD21FBE26B90074927B /* GameScene.sks */,
 				711FABD41FBE26B90074927B /* Actions.sks */,
+				714816E51FE45E17009457B1 /* Wind.sks */,
 				711FABDA1FBE26B90074927B /* Main.storyboard */,
 				711FABDF1FBE26B90074927B /* LaunchScreen.storyboard */,
 				711FABDD1FBE26B90074927B /* Assets.xcassets */,
@@ -226,6 +229,7 @@
 				71D6FB381FC8B5EB00F8FEF9 /* score.wav in Resources */,
 				711FABD31FBE26B90074927B /* GameScene.sks in Resources */,
 				711FABDE1FBE26B90074927B /* Assets.xcassets in Resources */,
+				714816E61FE45E17009457B1 /* Wind.sks in Resources */,
 				71D6FB311FC748C500F8FEF9 /* EnemyExplosion.sks in Resources */,
 				71D6FB371FC8B5EB00F8FEF9 /* pixelland.mp3 in Resources */,
 				711FABE11FBE26B90074927B /* LaunchScreen.storyboard in Resources */,

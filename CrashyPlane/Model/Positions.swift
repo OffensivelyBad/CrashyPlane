@@ -18,5 +18,6 @@ struct Positions {
     static let playerZPosition: CGFloat = 1
     static let scoringLabelZPosition: CGFloat = 10
     static let coinZPosition: CGFloat = -2
+    static let windZPosition: CGFloat = 2
     
 }

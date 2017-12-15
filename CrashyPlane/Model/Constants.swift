@@ -22,6 +22,7 @@ struct Constants {
     static let playerExplosion = "PlayerExplosion"
     static let enemyExplosion = "EnemyExplosion"
     static let coinName = "coin"
+    static let windName = "Wind"
     
     // Sounds
     static let explosionSoundName = "explosion.wav"
